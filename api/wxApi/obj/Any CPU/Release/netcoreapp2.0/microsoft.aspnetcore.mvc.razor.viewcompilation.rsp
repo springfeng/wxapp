@@ -1,0 +1,12 @@
+D:\小程序\wxApi\wxApi
+--output-path=obj\Any CPU\Release\netcoreapp2.0\
+--application-name=wxApi
+--content-root=D:\小程序\wxApi\wxApi
+--file=D:\小程序\wxApi\wxApi\Views\Home\About.cshtml
+--file=D:\小程序\wxApi\wxApi\Views\Home\Contact.cshtml
+--file=D:\小程序\wxApi\wxApi\Views\Home\Index.cshtml
+--file=D:\小程序\wxApi\wxApi\Views\Shared\Error.cshtml
+--file=D:\小程序\wxApi\wxApi\Views\Shared\_Layout.cshtml
+--file=D:\小程序\wxApi\wxApi\Views\Shared\_ValidationScriptsPartial.cshtml
+--file=D:\小程序\wxApi\wxApi\Views\_ViewImports.cshtml
+--file=D:\小程序\wxApi\wxApi\Views\_ViewStart.cshtml

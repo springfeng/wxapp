@@ -1,0 +1,15 @@
+<!--pages/vote/vote.wxml-->
+<!-- <text>pages/vote/vote.wxml</text> -->
+
+<view class="viewitem">
+  <label>标题：</label><label>{{votetitle}}</label>
+</view>
+
+<view class="viewitem">
+  <label>选项：</label><label>{{votetitle}}</label><switch></switch>
+</view>
+
+<view class="viewitem">
+  <button type="primary" formType="submit" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" 
+disabled="{{disabled}}" bindtap="createVote" class='btnitem'> 投票 </button>
+</view>

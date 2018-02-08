@@ -1,0 +1,27 @@
+/* pages/voteCreate/votecreate.wxss */
+
+
+/** 修改button默认的点击态样式类**/
+.button-hover {
+  background-color: red;
+}
+/** 添加自定义button点击态样式类**/
+.other-button-hover {
+  background-color: blue;
+}
+
+/** view间隔样式**/
+.viewitem{
+  margin: 30rpx
+}
+
+/** 按钮间隔样式**/
+.btnitem{
+  margin: 30rpx
+}
+
+
+.buttonstyle{
+  display: flex;
+  flex-direction: row;
+}

@@ -1,0 +1,77 @@
+<!--pages/voteCreate/votecreate.wxml-->
+
+<form class="formstyle" bindsubmit="formSubmit">
+
+<view class="viewitem buttonstyle">
+  <view>
+    <label>是否多选：</label>
+    <switch class='' checked bindchange="switchChange"/>
+  </view>
+  
+  <view>
+    <label>限制次数：</label>
+    <switch class='' checked bindchange="switch1Change"/>
+  </view>
+</view>
+
+
+<view class="viewitem">
+  <picker mode="date" value="{{Begindate}}"  bindchange="beginDateChange">
+    <view class="picker">
+      开始日期：{{Begindate}}
+    </view>
+  </picker>
+</view>
+
+<view class="viewitem">
+  <picker mode="time" value="{{BeginTime}}" start="00:00" end="23:59" bindchange="beginTimeChange">
+    <view class="picker">
+      开始时间: {{BeginTime}}
+    </view>
+  </picker>
+</view>
+
+<view class="viewitem">
+  <picker mode="date" value="{{Enddate}}"   bindchange="EndDateChange">
+    <view class="picker">
+      结束日期：{{Enddate}}
+    </view>
+  </picker>
+</view>
+
+<view class="viewitem">
+  <picker mode="time" value="{{EndTime}}" start="00:00" end="23:59" bindchange="EndTimeChange">
+    <view class="picker">
+      结束时间: {{EndTime}}
+    </view>
+  </picker>
+  
+</view>
+
+<input hidden='hiden' name='voteMulti' value='{{voteMulti}}'></input>
+<input hidden='hiden' name='voteCount' value='{{voteCount}}'></input>
+<input hidden='hiden' name='voteBegin' value='{{Begindate +" "+ BeginTime}}'></input>
+<input hidden='hiden' name='voteEnd' value='{{Enddate +" "+ EndTime}}'></input>
+
+<view class="viewitem">
+  <input placeholder="请输入投票标题" name="voteTitle" maxlength="50" />
+</view>
+
+
+<view wx:for="{{checkboxList}}"class="viewitem">
+  <input placeholder="请输入投票选项" name="VoteItems{{index}}" maxlength="50" />
+</view>
+
+<view class="buttonstyle">
+  <button type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}"
+  disabled="{{disabled}}" bindtap="createItem" > 添加选项 </button> 
+
+  <button type="warn" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}"
+  disabled="{{disabled}}" bindtap="deleteItem" > 删除选项 </button> 
+</view>
+  
+
+<button type="primary" formType="submit" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" 
+disabled="{{disabled}}" bindtap="createVote" class='btnitem'> 创建投票 </button>
+
+</form>

@@ -1,0 +1,6 @@
+/* pages/vote/vote.wxss */
+
+/** view间隔样式**/
+.viewitem{
+  margin: 30rpx
+}

@@ -1,0 +1,47 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/votecreate/votecreate",
+    "pages/votelist/votelist",
+    "pages/vote/vote"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "投票助手",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "selectedIconPath": "images/home.png",
+        "iconPath": "images/home.png"
+      },
+      {
+        "pagePath": "pages/votecreate/votecreate",
+        "text": "创建",
+        "selectedIconPath": "images/create.png",
+        "iconPath": "images/create.png"
+      },
+      {
+        "pagePath": "pages/votelist/votelist",
+        "text": "我的",
+        "selectedIconPath": "images/my.png",
+        "iconPath": "images/my.png"
+      },
+      {
+        "pagePath": "pages/vote/vote",
+        "text": "详情",
+        "selectedIconPath": "images/my.png",
+        "iconPath": "images/my.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true
+}
