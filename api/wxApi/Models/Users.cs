@@ -10,6 +10,7 @@ namespace wxApi.Models
         public Users()
         {
             Vote = new HashSet<Vote>();
+            VoteStatistics = new HashSet<VoteStatistics>();
         }
 
         [Key]
@@ -26,5 +27,9 @@ namespace wxApi.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Vote> Vote { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VoteStatistics> VoteStatistics { get; set; }
+
     }
 }
