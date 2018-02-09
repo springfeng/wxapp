@@ -1,2 +1,2 @@
 # wxapp
-微信投票小程序
+wechat vote app
