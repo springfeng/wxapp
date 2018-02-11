@@ -19,5 +19,24 @@ namespace wxApi
 
         public virtual DbSet<VoteStatistics> VoteStatistics { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<Users>()
+            //       .HasMany(e => e.VoteStatistics)
+            //       .WithRequired(e => e.Users)
+            //       .WillCascadeOnDelete(false);
+
+            //modelBuilder.Entity<Vote>()
+            //    .HasMany(e => e.VoteStatistics)
+            //    .WithRequired(e => e.Vote)
+            //    .WillCascadeOnDelete(false);
+
+            //modelBuilder.Entity<VoteItems>()
+            //    .HasMany(e => e.VoteStatistics)
+            //    .WithRequired(e => e.VoteItems)
+            //    .WillCascadeOnDelete(false);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
