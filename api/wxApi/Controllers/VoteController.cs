@@ -37,7 +37,7 @@ namespace wxApi.Controllers
         {
             if (OpenID == "" || OpenID == null)
             {
-                return _context.Vote.ToList();
+                return null;
             }
             else
             {
