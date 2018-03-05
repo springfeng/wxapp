@@ -5,8 +5,8 @@
   <label>标题：</label><label>{{votetitle}}</label>
 </view>
 
-<view class="viewitem">
-  <label>选项：</label><label>{{votetitle}}</label><switch></switch>
+<view class="viewitem" bindtap='demo' >
+  <label>选项：</label><label>{{votetitle}}</label><icon id='ico_selected' type="success" size="20"/>
 </view>
 
 <view class="viewitem">

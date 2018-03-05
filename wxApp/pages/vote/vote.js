@@ -63,4 +63,13 @@ Page({
   onShareAppMessage: function () {
   
   }
+  ,
+  /**
+   * 用户选择结束时间
+   */
+  demo: function (e) {
+    
+    var d=$("#ico_selected");
+    console.log(d);
+  },
 })
