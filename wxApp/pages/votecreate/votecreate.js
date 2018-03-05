@@ -175,7 +175,7 @@ Page({
       }
     }
     postData["VoteItems"] = postData["VoteItems"].substring(0, postData["VoteItems"].Length - 1);
-    
+    console.log(postData);
     wx.request({
       url: 'https://www.superiot.vip/api/vote',
       data: postData,
@@ -184,7 +184,7 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (res) {
-
+        console.log(res);
       }
     })  
   }
