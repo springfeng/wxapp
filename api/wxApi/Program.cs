@@ -23,7 +23,7 @@ namespace wxApi
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseKestrel(SetHost)//启用Kestrel
+                //.UseKestrel(SetHost)//启用Kestrel
                 .Build();
 
         /// <summary>

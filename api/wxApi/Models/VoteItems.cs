@@ -9,7 +9,7 @@ namespace wxApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public VoteItems()
         {
-            VoteStatistics = new HashSet<VoteStatistics>();
+            //VoteStatistics = new HashSet<VoteStatistics>();
         }
 
         [StringLength(50)]
@@ -27,8 +27,8 @@ namespace wxApi.Models
         public virtual Vote Vote { get; set; }
 
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<VoteStatistics> VoteStatistics { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<VoteStatistics> VoteStatistics { get; set; }
 
     }
 }

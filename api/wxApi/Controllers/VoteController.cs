@@ -17,12 +17,12 @@ namespace wxApi.Controllers
         {
             _context = context;
         }
-        //// GET: api/Vote
-        //[HttpGet]
-        //public List<Vote> Get()
-        //{
-        //    return _context.Vote.ToList();
-        //}
+        // GET: api/Vote
+        [HttpGet]
+        public List<Vote> Get()
+        {
+            return _context.Vote.ToList();
+        }
 
 
 

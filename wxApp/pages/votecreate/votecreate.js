@@ -177,7 +177,7 @@ Page({
     postData["VoteItems"] = postData["VoteItems"].substring(0, postData["VoteItems"].Length - 1);
     
     wx.request({
-      url: 'https://share.ngrok.xiaomiqiu.cn/api/vote',
+      url: 'https://www.superiot.vip/api/vote',
       data: postData,
       method:"POST",
       header: {
