@@ -1,1 +1,3 @@
-/api/wxApi/bin
+api/wxApi/bin
+api/.vs
+api/wxApi/obj
