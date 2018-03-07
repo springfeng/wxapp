@@ -48,13 +48,13 @@
   
 </view>
 
-<input hidden='hiden' name='voteMulti' value='{{voteMulti}}'></input>
-<input hidden='hiden' name='voteCount' value='{{voteCount}}'></input>
-<input hidden='hiden' name='voteBegin' value='{{Begindate +" "+ BeginTime}}'></input>
-<input hidden='hiden' name='voteEnd' value='{{Enddate +" "+ EndTime}}'></input>
+<input hidden='hiden' name='VoteMulti' value='{{VoteMulti}}'></input>
+<input hidden='hiden' name='LimitTimes' value='{{LimitTimes}}'></input>
+<input hidden='hiden' name='BeginTime' value='{{Begindate +" "+ BeginTime}}'></input>
+<input hidden='hiden' name='EndTime' value='{{Enddate +" "+ EndTime}}'></input>
 
 <view class="viewitem">
-  <input placeholder="请输入投票标题" name="voteTitle" maxlength="50" />
+  <input placeholder="请输入投票标题" name="VoteTitle" maxlength="50" />
 </view>
 
 

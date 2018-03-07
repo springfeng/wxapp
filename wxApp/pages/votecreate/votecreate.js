@@ -3,6 +3,9 @@
 // 在需要使用的js文件中，导入js  
 var util = require('../../utils/util.js');  
 
+//获取应用实例
+const app = getApp();
+
 Page({
   /**
    * 页面的初始数据
@@ -19,8 +22,8 @@ Page({
     Enddate: "", 
     EndTime: "00:00",
     checkboxList:[0,1,2],
-    voteMulti:true,
-    voteCount: true
+    VoteMulti:true,
+    LimitTimes: true
   },
 
   /**
@@ -95,7 +98,7 @@ Page({
    */
   switchChange: function (e) {
     this.setData({
-      voteMulti: e.detail.value
+      VoteMulti: e.detail.value
     })
   },
   /**
@@ -103,7 +106,7 @@ Page({
    */
   switch1Change: function (e) {
     this.setData({
-      voteCount: e.detail.value
+      LimitTimes: e.detail.value
     })
   },
   /**
@@ -162,20 +165,38 @@ Page({
    * 提交表单
    */
   formSubmit: function (e) {
-    console.log('form发生了submit事件，携带数据为：', e.detail.value)
     var formData = e.detail.value;
     var postData={};
+    // console.log(formData)
     postData["VoteItems"]="";
+    var tmp="";
     for (var item in formData){
-      var a = item.indexOf("VoteItems");
       if (item.indexOf("VoteItems")>=0){
-        postData["VoteItems"]+=formData[item]+",";
+        tmp+=formData[item]+",";
       }else{
         postData[item]=formData[item];
       }
     }
-    postData["VoteItems"] = postData["VoteItems"].substring(0, postData["VoteItems"].Length - 1);
-    
+    // console.log(tmp)
+    // console.log(tmp.substring(0, tmp.length - 1))
+    postData["VoteItems"] = tmp.substring(0, tmp.length - 1);
+
+    //
+    if (postData["VoteMulti"]){
+      postData["VoteMulti"]=1;
+    }else{
+      postData["VoteMulti"]=0;
+    }
+    //
+    if (postData["LimitTimes"]) {
+      postData["LimitTimes"] = 1;
+    } else {
+      postData["LimitTimes"] = 0;
+    }
+    //
+
+    console.log(app.globalData.userInfo)
+
     wx.request({
       url: 'https://www.superiot.vip/api/vote',
       data: postData,
@@ -184,7 +205,7 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (res) {
-
+        console.log(res)
       }
     })  
   }
