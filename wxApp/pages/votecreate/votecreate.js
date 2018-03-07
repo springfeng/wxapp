@@ -195,8 +195,8 @@ Page({
     }
     //
 
-    console.log(app.globalData.userInfo)
-
+    postData["OpenID"]=app.globalData.openID;
+    console.log(postData)
     wx.request({
       url: 'https://www.superiot.vip/api/vote',
       data: postData,

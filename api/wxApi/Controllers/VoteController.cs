@@ -12,16 +12,16 @@ namespace wxApi.Controllers
     [Route("api/Vote")]
     public class VoteController : Controller
     {
-        private EFDbContext _context;
+        private EFDbContext DbContext;
         public VoteController(EFDbContext context)
         {
-            _context = context;
+            DbContext = context;
         }
         // GET: api/Vote
         [HttpGet]
         public List<Vote> Get()
         {
-            return _context.Vote.ToList();
+            return DbContext.Vote.ToList();
         }
 
 
@@ -41,7 +41,7 @@ namespace wxApi.Controllers
             }
             else
             {
-                return _context.Vote.Where(e => e.OpenID == OpenID).ToList();
+                return DbContext.Vote.Where(e => e.OpenID == OpenID).ToList();
             }
         }
 
@@ -64,12 +64,14 @@ namespace wxApi.Controllers
             vote.VoteMulti = voteCreate.VoteMulti;
             vote.VoteTitle = voteCreate.VoteTitle;
             vote.VoteID = Guid.NewGuid().ToString("N");
-            foreach (string ItemName in voteCreate.VoteItems)
+            List<string> items = voteCreate.VoteItems.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            foreach (string ItemName in items)
             {
                 vote.VoteItems.Add(new VoteItems() { CreateTime = DateTime.Now, ItemName = ItemName, VoteItemID = Guid.NewGuid().ToString("N") });
             }
+            DbContext.Vote.Add(vote);
 
-            _context.SaveChanges();
+            DbContext.SaveChanges();
 
         }
 

@@ -13,7 +13,6 @@ namespace wxApi.Models
         public int VoteMulti { get; set; }
         public int LimitTimes { get; set; }
         public string OpenID { get; set; }
-
-        public List<string> VoteItems = new List<string>();
+        public string VoteItems { get; set; }
     }
 }
