@@ -3,3 +3,4 @@ api/.vs
 api/wxApi/obj
 api/wxApi/wwwroot
 .vscode
+api/wxApi/Properties
