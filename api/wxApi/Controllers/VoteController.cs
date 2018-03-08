@@ -76,7 +76,7 @@ namespace wxApi.Controllers
             }
             catch (Exception e)
             {
-
+                
             }
         }
 
