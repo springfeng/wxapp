@@ -54,25 +54,30 @@ namespace wxApi.Controllers
         [HttpPost]
         public void Post(VoteCreate voteCreate)
         {
-            //创建投票
-            Vote vote = new Vote();
-            vote.OpenID = voteCreate.OpenID;
-            vote.BeginTime = voteCreate.BeginTime;
-            vote.EndTime = voteCreate.EndTime;
-            vote.CreateTime = DateTime.Now;
-            vote.LimitTimes = voteCreate.LimitTimes;
-            vote.VoteMulti = voteCreate.VoteMulti;
-            vote.VoteTitle = voteCreate.VoteTitle;
-            vote.VoteID = Guid.NewGuid().ToString("N");
-            List<string> items = voteCreate.VoteItems.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).ToList();
-            foreach (string ItemName in items)
-            {
-                vote.VoteItems.Add(new VoteItems() { CreateTime = DateTime.Now, ItemName = ItemName, VoteItemID = Guid.NewGuid().ToString("N") });
+            try
+            { //创建投票
+                Vote vote = new Vote();
+                vote.OpenID = voteCreate.OpenID;
+                vote.BeginTime = voteCreate.BeginTime;
+                vote.EndTime = voteCreate.EndTime;
+                vote.CreateTime = DateTime.Now;
+                vote.LimitTimes = voteCreate.LimitTimes;
+                vote.VoteMulti = voteCreate.VoteMulti;
+                vote.VoteTitle = voteCreate.VoteTitle;
+                vote.VoteID = Guid.NewGuid().ToString("N");
+                List<string> items = voteCreate.VoteItems.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                foreach (string ItemName in items)
+                {
+                    vote.VoteItems.Add(new VoteItems() { CreateTime = DateTime.Now, ItemName = ItemName, VoteItemID = Guid.NewGuid().ToString("N") });
+                }
+                DbContext.Vote.Add(vote);
+
+                DbContext.SaveChanges();
             }
-            DbContext.Vote.Add(vote);
+            catch (Exception e)
+            {
 
-            DbContext.SaveChanges();
-
+            }
         }
 
         //// PUT: api/Vote/5

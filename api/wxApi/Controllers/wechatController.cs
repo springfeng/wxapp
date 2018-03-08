@@ -30,12 +30,16 @@ namespace wxApi.Controllers
             if (ret.errcode==ReturnCode.请求成功)
             {
                 //插入到用户表中
-                Users users = new Users();
-                users.OpenID = ret.openid;
-                users.CreateTime = DateTime.Now;
-                DbContext.Users.Add(users);
-                DbContext.SaveChanges();
-
+                Users searchUser = DbContext.Users.Find(ret.openid);
+                if (searchUser==null)
+                {
+                    Users users = new Users();
+                    users.OpenID = ret.openid;
+                    users.CreateTime = DateTime.Now;
+                    DbContext.Users.Add(users);
+                    DbContext.SaveChanges();
+                }
+                
                 //返回openid
                 ReturnJsonResult retJson = new ReturnJsonResult();
                 retJson.retCode = true;
