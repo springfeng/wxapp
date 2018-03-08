@@ -202,7 +202,7 @@ Page({
       data: postData,
       method:"POST",
       header: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/x-www-form-urlencoded' //必须修改才能post成功
       },
       success: function (res) {
         console.log(res)
