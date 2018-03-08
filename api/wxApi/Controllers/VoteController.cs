@@ -68,7 +68,7 @@ namespace wxApi.Controllers
                 List<string> items = voteCreate.VoteItems.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).ToList();
                 foreach (string ItemName in items)
                 {
-                    vote.VoteItems.Add(new VoteItems() { CreateTime = DateTime.Now, ItemName = ItemName, VoteItemID = Guid.NewGuid().ToString("N") });
+                    vote.VoteItems.Add(new VoteItems() { CreateTime = DateTime.Now, ItemName = ItemName, VoteItemID = Guid.NewGuid().ToString("N"),VoteID= vote.VoteID});
                 }
                 DbContext.Vote.Add(vote);
 
