@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/votelist/votelist",
     "pages/index/index",
     "pages/votecreate/votecreate",
-    "pages/votelist/votelist",
     "pages/vote/vote"
   ],
   "window": {

@@ -1,6 +1,3 @@
-<!--pages/vote/vote.wxml-->
-<!-- <text>pages/vote/vote.wxml</text> -->
-
 <view class="viewitem">
   <label>标题：</label><label>{{votetitle}}</label>
 </view>
