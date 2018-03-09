@@ -4,37 +4,50 @@
 }
 
 
-    
-
-    <div id="div_smscode">555555555555</div>
-    <div id="div_ordercode">555555555555</div>
-
-    <br /><br />http协议<br /><br />
-
-    <input type="button" value="单独生成渠道二维码" onclick="ChannelCreate_Single()" />
-
-    <div id="div_ShowInfo">555555555555</div>
 
 
-    <script type="text/javascript">
-// 单独生成渠道二维码
-            function ChannelCreate_Single()
-            {
-                var txt="";
+<div id="div_smscode">555555555555</div>
+<div id="div_ordercode">555555555555</div>
 
-                    $.ajax({
-                        url: '/api/Vote/',// 跳转到 action
-                        type: 'post',
-                        data: {
-                             "VoteItems": "规定 ,范德萨范德萨,范德萨范德萨", "VoteMulti": 1, "LimitTimes": 1, "BeginTime": "2018-03-08 00:00", "EndTime": "2018-03-08 00:00", "VoteTitle": "地方撒范德萨", "OpenID": "oHm4a0ZjlzDfwDP1CFPhge3XdAxM" 
-                        },
-                        dataType: 'json',
-                        success: function (data) {
-                            $("#div_ShowInfo").text(JSON.stringify(data));
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        }
-                    });
+<br /><br />http协议<br /><br />
+
+<input type="button" value="创建投票" onclick="Create()" />
+<input type="button" value="获取投票详情" onclick="GetDetail()" />
+
+<div id="div_ShowInfo">555555555555</div>
 
 
-            }</script>
+<script type="text/javascript">
+
+    function GetDetail() {
+        var txt = "";
+        $.ajax({
+            url: '/api/VoteDetail/?OpenID=oHm4a0ZjlzDfwDP1CFPhge3XdAxM&VoteID=bd5535ec640f468787605ca286c650c4',// 跳转到 action
+            type: 'get',
+            
+            dataType: 'json',
+            success: function (data) {
+                $("#div_ShowInfo").text(JSON.stringify(data));
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+            }
+        });
+    }
+    function Create() {
+        var txt = "";
+        $.ajax({
+            url: '/api/Vote/',// 跳转到 action
+            type: 'post',
+            data: {
+                "VoteItems": "规定 ,范德萨范德萨,范德萨范德萨", "VoteMulti": 1, "LimitTimes": 1, "BeginTime": "2018-03-08 00:00", "EndTime": "2018-03-08 00:00", "VoteTitle": "地方撒范德萨", "OpenID": "oHm4a0ZjlzDfwDP1CFPhge3XdAxM"
+            },
+            dataType: 'json',
+            success: function (data) {
+                $("#div_ShowInfo").text(JSON.stringify(data));
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+            }
+        });
+    }
+
+</script>

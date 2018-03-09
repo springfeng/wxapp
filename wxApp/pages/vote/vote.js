@@ -12,7 +12,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    
+    // { "VoteItemsList":[{ "VoteItemID": "bd5535ec640f468787605ca286c650c4", "ItemName": "测试选项3" }, { "VoteItemID": "bd5535ec640f468787605ca286c650c4", "ItemName": "测试选项2" }, { "VoteItemID": "bd5535ec640f468787605ca286c650c4", "ItemName": "测试选项" }], "VoteID":"bd5535ec640f468787605ca286c650c4", "VoteTitle":"测试投票", "OpenID":"oHm4a0ZjlzDfwDP1CFPhge3XdAxM", "BeginTime":"2018-03-09T00:00:00", "EndTime":"2018-03-09T00:00:00", "CreateTime":"0001-01-01T00:00:00" }
   },
 
   /**

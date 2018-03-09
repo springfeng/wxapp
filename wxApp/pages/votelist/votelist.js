@@ -19,7 +19,7 @@ Page({
    var self = this;
    //请求个人的投票数据
    wx.request({
-     url: 'https://www.superiot.vip/api/Vote/?OpenID=' + openID,
+     url: 'https://www.superiot.vip/api/Vote/?OpenID=' + openID+'&rn='+Math.random,
      method: "GET",
      header: {
        'Content-Type': 'application/x-www-form-urlencoded' //必须修改才能post成功
@@ -27,7 +27,6 @@ Page({
      success: function (res) {
        console.log(res.data);
        self.setData({MyVoteList:res.data});
-      
      }
    })  
     
@@ -80,5 +79,11 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  // 点击投票列表
+  itemClick: function (e){
+    console.log(e.target.dataset);
+    console.log(e.target.dataset.voteid);
+    console.log("你点击了")
   }
 })

@@ -24,8 +24,6 @@ namespace wxApi.Controllers
             return DbContext.Vote.ToList();
         }
 
-
-
         /// <summary>
         /// 获取用户投票列表
         /// </summary>
@@ -33,7 +31,7 @@ namespace wxApi.Controllers
         /// <returns></returns>
         // GET: api/Vote/5
         [HttpGet("{OpenID}", Name = "Get")]
-        public List<Vote> Get(string OpenID)
+        public List<VoteList> Get(string OpenID)
         {
             if (OpenID == "" || OpenID == null)
             {
@@ -41,7 +39,10 @@ namespace wxApi.Controllers
             }
             else
             {
-                return DbContext.Vote.Where(e => e.OpenID == OpenID).ToList();
+                return DbContext.Vote.OrderByDescending(p => p.CreateTime)
+                    .Where(e => e.OpenID == OpenID)
+                    .Select(o => new VoteList() { VoteID = o.VoteID, VoteTitle = o.VoteTitle })
+                    .ToList();
             }
         }
 
