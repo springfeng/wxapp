@@ -17,12 +17,12 @@ namespace wxApi.Controllers
         {
             DbContext = context;
         }
-        // GET: api/Vote
-        [HttpGet]
-        public List<Vote> Get()
-        {
-            return DbContext.Vote.ToList();
-        }
+        //// GET: api/Vote
+        //[HttpGet]
+        //public List<Vote> Get()
+        //{
+        //    return DbContext.Vote.ToList();
+        //}
 
         /// <summary>
         /// 获取用户投票列表
@@ -30,8 +30,8 @@ namespace wxApi.Controllers
         /// <param name="OpenID">用户ID</param>
         /// <returns></returns>
         // GET: api/Vote/5
-        [HttpGet("{OpenID}", Name = "Get")]
-        public List<VoteList> Get(string OpenID)
+        [HttpGet]
+        public List<VoteList> Get(string OpenID,string rn)
         {
             if (OpenID == "" || OpenID == null)
             {

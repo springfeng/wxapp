@@ -19,7 +19,7 @@ Page({
    var self = this;
    //请求个人的投票数据
    wx.request({
-     url: 'https://www.superiot.vip/api/Vote/?OpenID=' + openID+'&rn='+Math.random,
+     url: 'https://www.superiot.vip/api/Vote/?OpenID=' + openID+'&rn='+Math.random(),
      method: "GET",
      header: {
        'Content-Type': 'application/x-www-form-urlencoded' //必须修改才能post成功

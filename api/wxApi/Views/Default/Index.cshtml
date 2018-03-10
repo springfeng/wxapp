@@ -13,6 +13,7 @@
 
 <input type="button" value="创建投票" onclick="Create()" />
 <input type="button" value="获取投票详情" onclick="GetDetail()" />
+<input type="button" value="获取投票列表" onclick="GetList()" />
 
 <div id="div_ShowInfo">555555555555</div>
 
@@ -24,7 +25,7 @@
         $.ajax({
             url: '/api/VoteDetail/?OpenID=oHm4a0ZjlzDfwDP1CFPhge3XdAxM&VoteID=bd5535ec640f468787605ca286c650c4',// 跳转到 action
             type: 'get',
-            
+
             dataType: 'json',
             success: function (data) {
                 $("#div_ShowInfo").text(JSON.stringify(data));
@@ -49,5 +50,17 @@
             }
         });
     }
-
+    function GetList() {
+        var txt = "";
+        $.ajax({
+            url: '/api/Vote/?OpenID=oHm4a0ZjlzDfwDP1CFPhge3XdAxM&rn=' + Math.random(),
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                $("#div_ShowInfo").text(JSON.stringify(data));
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+            }
+        });
+    }
 </script>
