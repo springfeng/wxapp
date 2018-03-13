@@ -2,7 +2,7 @@
 
 //获取应用实例
 const app = getApp();
-var that = this;
+
 
 Page({
 
@@ -20,17 +20,6 @@ Page({
         { VoteItemID: "4176f2743561433abcf74049c7dc4e7c", ItemName: "543543" }
       ]
     }
-  },
-  showTopTips: function () {
-    
-    this.setData({
-      showTopTips: true
-    });
-    setTimeout(function () {
-      that.setData({
-        showTopTips: false
-      });
-    }, 3000);
   },
   radioChange: function (e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value);
@@ -59,52 +48,49 @@ Page({
       }
     }
 
-    that.setData({
+    this.setData({
       checkboxItems: checkboxItems
     });
   },
   bindDateChange: function (e) {
-    that.setData({
+    this.setData({
       date: e.detail.value
     })
   },
   bindTimeChange: function (e) {
-    that.setData({
+    this.setData({
       time: e.detail.value
     })
   },
   bindCountryCodeChange: function (e) {
     console.log('picker country code 发生选择改变，携带值为', e.detail.value);
 
-    that.setData({
+    this.setData({
       countryCodeIndex: e.detail.value
     })
   },
   bindCountryChange: function (e) {
     console.log('picker country 发生选择改变，携带值为', e.detail.value);
 
-    that.setData({
+    this.setData({
       countryIndex: e.detail.value
     })
   },
   bindAccountChange: function (e) {
     console.log('picker account 发生选择改变，携带值为', e.detail.value);
 
-    that.setData({
+    this.setData({
       accountIndex: e.detail.value
     })
   },
-  bindAgreeChange: function (e) {
-    that.setData({
-      isAgree: !!e.detail.value.length
-    });
-  },
+  
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     // console.log("接收到的参数是str=" + options.VoteID + "-" + options.OpenID); 
+    var self=this;
     //获取投票详情
     wx.request({
       url: 'https://www.superiot.vip/api/VoteDetail/?OpenID=' + options.OpenID + '&VoteID=' + options.VoteID+'&rn=' + Math.random(),
@@ -114,11 +100,9 @@ Page({
       },
       success: function (res) {
         console.log(res);
-        that.setData({ Vote: res.data });
+        self.setData({ Vote: res.data });
       }
     })
-
-    // { "VoteItemsList":[{ "VoteItemID": "bd5535ec640f468787605ca286c650c4", "ItemName": "测试选项3" }, { "VoteItemID": "bd5535ec640f468787605ca286c650c4", "ItemName": "测试选项2" }, { "VoteItemID": "bd5535ec640f468787605ca286c650c4", "ItemName": "测试选项" }], "VoteID":"bd5535ec640f468787605ca286c650c4", "VoteTitle":"测试投票", "OpenID":"oHm4a0ZjlzDfwDP1CFPhge3XdAxM", "BeginTime":"2018-03-09T00:00:00", "EndTime":"2018-03-09T00:00:00", "CreateTime":"0001-01-01T00:00:00" }
   },
 
   /**
