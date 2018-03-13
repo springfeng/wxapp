@@ -2,7 +2,7 @@
 
 //获取应用实例
 var app = getApp();
-
+var openID;
 Page({
   /**
    * 页面的初始数据
@@ -15,7 +15,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var openID;
+   
     var self = this;
     if (app.globalData.openID == undefined || app.globalData.openID == null) {
       openID = wx.getStorageSync('OpenID') 
@@ -96,10 +96,25 @@ Page({
   },
   // 点击投票列表
   itemClick: function (e) {
-    console.log(e.target.dataset);
-    console.log(e.target.dataset.voteid);
-    console.log("你点击了");
+    // console.log(e.target.dataset.voteid);
+    // console.log("你点击了");
+    // console.log('/pages/vote/vote?VoteID=' + e.target.dataset.voteid);
     //跳转到详情页
+    wx.navigateTo({
+      url: '/pages/vote/vote?VoteID=' + e.target.dataset.voteid + '&OpenID=' + openID,
+      success: function (res) {
+        // success
+        // console.log('onBtnClick success() res:');
+      },
+      fail: function () {
+        // fail
+        // console.log('onBtnClick fail() !!!');
+      },
+      complete: function () {
+        // console.log('onBtnClick complete() !!!');
+        // complete
+      }
+    })
 
   }
 })

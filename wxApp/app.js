@@ -17,6 +17,15 @@ App({
             method: 'GET',
             success:function (json) {
               if(json.data.retCode){
+                // wx.showModal({
+                //   content: json.data.retContent,
+                //   showCancel: false,
+                //   success: function (res) {
+                //     if (res.confirm) {
+                //       console.log('用户点击确定')
+                //     }
+                //   }
+                // });
                 //成功
                 getApp().globalData.openID = json.data.retContent;
                 //将openid存储到本地手机
