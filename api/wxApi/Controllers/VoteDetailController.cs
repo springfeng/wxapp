@@ -41,7 +41,7 @@ namespace wxApi.Controllers
                 voteDetail.OpenID = vote.OpenID;
                 voteDetail.VoteMulti = vote.VoteMulti;
                 foreach (VoteItems item in items) {
-                    voteDetail.VoteItemsList.Add(new VoteItemDetail() { ItemName = item.ItemName, VoteItemID = item.VoteID });
+                    voteDetail.VoteItemsList.Add(new VoteItemDetail() { ItemName = item.ItemName, VoteItemID = item.VoteItemID });
                 }
                 return voteDetail;
             }
