@@ -15,36 +15,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var openID;
     var self = this;
-    // app.userInfoReadyCallback=function(){
-    //   console.log('用户数据设置完成可以获取userinfo')
-    // }
-    // app.OpenIDReadyCallback = function (res) {
-      var openID = app.globalData.openID;
-      console.log('---打印数据开始---')
-      console.log(app)
-      console.log(app.globalData)
-      console.log(openID)
-      console.log('---打印数据结束---')
-      
-      //请求个人的投票数据
-      wx.request({
-        url: 'https://www.superiot.vip/api/Vote/?OpenID=' + openID + '&rn=' + Math.random(),
-        method: "GET",
-        header: {
-          'Content-Type': 'application/x-www-form-urlencoded' //必须修改才能post成功
-        },
-        success: function (res) {
-          console.log(res.data);
-          self.setData({ MyVoteList: res.data });
-        }
-      })
-      // z.setData({
-      //   userInfo: app.globalData.userInfo
-      // })
-    // }
-    
+    if (app.globalData.openID == undefined || app.globalData.openID == null) {
+      openID = wx.getStorageSync('OpenID') 
+      console.log("从Storage获取OpenID");
+    } else {
+      openID = app.globalData.openID;
+      console.log("从globalData获取OpenID");
+    }
 
+    //请求个人的投票数据
+    wx.request({
+      url: 'https://www.superiot.vip/api/Vote/?OpenID=' + openID + '&rn=' + Math.random(),
+      method: "GET",
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded' //必须修改才能post成功
+      },
+      success: function (res) {
+        self.setData({ MyVoteList: res.data });
+      }
+    })
   },
 
   /**
@@ -99,6 +90,8 @@ Page({
   itemClick: function (e) {
     console.log(e.target.dataset);
     console.log(e.target.dataset.voteid);
-    console.log("你点击了")
+    console.log("你点击了");
+    //跳转到详情页
+    
   }
 })

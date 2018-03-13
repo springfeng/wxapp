@@ -2,9 +2,9 @@
 App({
   onLaunch: function () {
     // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+    // var logs = wx.getStorageSync('logs') || []
+    // logs.unshift(Date.now())
+    //wx.setStorageSync('logs', logs)
 
     // 登录
     wx.login({
@@ -19,6 +19,10 @@ App({
               if(json.data.retCode){
                 //成功
                 getApp().globalData.openID = json.data.retContent;
+                //将openid存储到本地手机
+                wx.setStorageSync('OpenID', json.data.retContent);
+
+                console.log('获取用户登录态成功！' + json.data.retContent);
               }else{
                 //失败
                 console.log('获取用户登录态失败！' + res.errMsg);
