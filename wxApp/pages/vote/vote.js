@@ -15,43 +15,45 @@ Page({
       VoteTitle:'文字猜谜',
       OpenID: "oHm4a0ZjlzDfwDP1CFPhge3XdAxM",
       VoteMulti:1,
-      VoteItemsList: [
-        { VoteItemID: "4176f2743561433abcf74049c7dc4e7c", ItemName: "妇女但反对" }, 
-        { VoteItemID: "4176f2743561433abcf74049c7dc4e7c", ItemName: "543543" }
-      ]
-    }
+    },
+    VoteItemsList: [
+      { VoteItemID: "4176f2743561433abcf74049c7dc4e7c", ItemName: "妇女但反对" },
+      { VoteItemID: "4176f2743561433abcf74049c7dc4e7c", ItemName: "543543" }
+    ]
   },
   radioChange: function (e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value);
-
     var Items = this.data.Vote.VoteItemsList;
-    console.log(this.data.Vote.VoteItemsList);
-    for (var i = 0, len = Items.length; i < len; ++i) {
-      Items[i].checked = Items[i].value == e.detail.value;
+    for (var i = 0; i< Items.length; i++) {
+      if (Items[i].VoteItemID == e.detail.value){
+        Items[i].checked=true;
+      }else{
+        Items[i].checked=false;
+      }
     }
-
+    // console.log(Items);
     this.setData({
-      radioItems: Items
+      VoteItemsList: Items
     });
   },
   checkboxChange: function (e) {
-    console.log('checkbox发生change事件，携带value值为：', e.detail.value);
-
-    // var checkboxItems = this.data.checkboxItems, values = e.detail.value;
-    // for (var i = 0, lenI = checkboxItems.length; i < lenI; ++i) {
-    //   checkboxItems[i].checked = false;
-
-    //   for (var j = 0, lenJ = values.length; j < lenJ; ++j) {
-    //     if (checkboxItems[i].value == values[j]) {
-    //       checkboxItems[i].checked = true;
-    //       break;
-    //     }
-    //   }
-    // }
-
-    // this.setData({
-    //   checkboxItems: checkboxItems
-    // });
+    var Items = this.data.Vote.VoteItemsList;
+    // console.log( Items);
+    // console.log( e.detail.value);
+    var values = e.detail.value;
+    for (var i = 0; i < Items.length; i++) {
+      Items[i].checked = false;
+      // console.log(Items);
+      for (var j = 0; j<values.length; j++) {
+        if (Items[i].VoteItemID == values[j]) {
+          Items[i].checked = true;
+          break;
+        }
+      }
+    }
+    
+    this.setData({
+      VoteItemsList: Items
+    });
   },
 
   
@@ -71,7 +73,10 @@ Page({
       },
       success: function (res) {
         console.log(res);
-        self.setData({ Vote: res.data });
+        self.setData({ Vote: res.data,
+          VoteItemsList: res.data.VoteItemsList
+
+         });
       }
     })
   },
