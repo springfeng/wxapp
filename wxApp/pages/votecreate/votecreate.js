@@ -205,9 +205,12 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded' //必须修改才能post成功
       },
       success: function (res) {
-        console.log(res)
+          wx.showToast({
+            title: '创建成功',
+            icon: 'success',
+            duration: 3000
+          });
       }
     })  
   }
-  
 })

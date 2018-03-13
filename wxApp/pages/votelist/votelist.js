@@ -24,7 +24,15 @@ Page({
       openID = app.globalData.openID;
       console.log("从globalData获取OpenID");
     }
-
+    // wx.showModal({
+    //   content: openID + "--" + wx.getStorageSync('OpenID') + "--" + app.globalData.openID,
+    //   showCancel: false,
+    //   success: function (res) {
+    //     if (res.confirm) {
+    //       console.log('用户点击确定')
+    //     }
+    //   }
+    // });
     //请求个人的投票数据
     wx.request({
       url: 'https://www.superiot.vip/api/Vote/?OpenID=' + openID + '&rn=' + Math.random(),
@@ -92,6 +100,6 @@ Page({
     console.log(e.target.dataset.voteid);
     console.log("你点击了");
     //跳转到详情页
-    
+
   }
 })
