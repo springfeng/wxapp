@@ -81,12 +81,30 @@ namespace wxApi.Controllers
             }
         }
 
-        //// PUT: api/Vote/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody]string value)
-        //{
-        //    //更新投票
-        //}
+        // PUT: api/Vote/5
+        [HttpPut]
+        public void Put(VoteUpdate voteUpdate)
+        {
+            //更新投票
+            //判断投票多选类型
+            List<string> items = voteUpdate.VoteItemIDs.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            DateTime dateTime = DateTime.Now;
+
+            foreach (string item in items)
+            {
+                VoteStatistics voteStatistics = new VoteStatistics();
+                voteStatistics.ID = Guid.NewGuid().ToString("N");
+                voteStatistics.OpenID = voteUpdate.OpenID;
+                voteStatistics.VoteID = voteUpdate.VoteID;
+                voteStatistics.VoteItemID = item;
+                voteStatistics.CreateTime = dateTime;
+                DbContext.VoteStatistics.Add(voteStatistics);
+            }
+
+            DbContext.SaveChanges();
+
+        }
 
         //// DELETE: api/ApiWithActions/5
         //[HttpDelete("{id}")]

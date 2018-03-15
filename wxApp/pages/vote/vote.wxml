@@ -1,9 +1,11 @@
+<form class="formstyle" bindsubmit="formSubmit">
 <view class="page__hd">
   <view class="weui-cell page__title">{{Vote.VoteTitle}}</view>
 </view>
 
 <view class="weui-cells weui-cells_after-title">
   <view wx:if="{{Vote.VoteMulti==1}}">
+    <!-- 多选列表 -->
     <checkbox-group bindchange="checkboxChange">
       <label class="weui-cell weui-check__label" wx:for="{{VoteItemsList}}" wx:key="value">
         <checkbox class="weui-check" value="{{item.VoteItemID}}" />
@@ -16,6 +18,7 @@
     </checkbox-group>
   </view>
   <view wx:else>
+  <!-- 单选列表 -->
     <radio-group bindchange="radioChange">
       <label class="weui-cell weui-check__label" wx:for="{{VoteItemsList}}" wx:key="value">
         <radio class="weui-check" value="{{item.VoteItemID}}" />
@@ -27,6 +30,9 @@
     </radio-group>
   </view>
 </view>
+
 <view class="viewitem">
-  <button class="weui-btn" type="primary"  >投票</button>
+  <button class="weui-btn" type="primary" formType="submit" >投票</button>
 </view>
+
+</form>
