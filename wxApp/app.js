@@ -6,16 +6,19 @@ App({
     // logs.unshift(Date.now())
     //wx.setStorageSync('logs', logs)
 
+    
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        console.log('登录开始--' + JSON.stringify(res) );
         if (res.code) {
           //发起网络请求
           wx.request({
             url: 'https://www.superiot.vip/api/wechat/?jsCode='+res.code,
             method: 'GET',
             success:function (json) {
+              console.log('请求openID--' + JSON.stringify(json.data));
               if(json.data.retCode){
                 // wx.showModal({
                 //   content: json.data.retContent,

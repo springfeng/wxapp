@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/votelist/votelist",
     "pages/index/index",
+    "pages/votelist/votelist",
     "pages/votecreate/votecreate",
     "pages/vote/vote"
   ],
