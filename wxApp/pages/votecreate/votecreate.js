@@ -181,7 +181,7 @@ Page({
     // console.log(tmp.substring(0, tmp.length - 1))
     postData["VoteItems"] = tmp.substring(0, tmp.length - 1);
 
-    console.log(JSON.stringify(postData) + '------------')
+    // console.log(JSON.stringify(postData) + '------------')
     //
     if (postData["VoteMulti"] == "true") {
       postData["VoteMulti"] = 1;
@@ -197,7 +197,19 @@ Page({
     //
 
     postData["OpenID"] = app.globalData.openID;
-    console.log(JSON.stringify(postData))
+    // console.log(JSON.stringify(postData))
+    if (postData.VoteItems == "" || postData.VoteTitle == "") {
+      wx.showModal({
+            content: "请确认填写是否正确！",
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+                console.log('用户点击确定')
+              }
+            }
+          });
+      return;
+    }
     wx.request({
       url: 'https://www.superiot.vip/api/Vote',
       data: postData,

@@ -19,10 +19,10 @@ Page({
     var self = this;
     if (app.globalData.openID == undefined || app.globalData.openID == null) {
       openID = wx.getStorageSync('OpenID') 
-      console.log("从Storage获取OpenID");
+      // console.log("从Storage获取OpenID");
     } else {
       openID = app.globalData.openID;
-      console.log("从globalData获取OpenID");
+      // console.log("从globalData获取OpenID");
     }
     // wx.showModal({
     //   content: openID + "--" + wx.getStorageSync('OpenID') + "--" + app.globalData.openID,
@@ -57,7 +57,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.onLoad();
   },
 
   /**
