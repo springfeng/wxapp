@@ -86,24 +86,50 @@ namespace wxApi.Controllers
         public void Put(VoteUpdate voteUpdate)
         {
             //更新投票
-            //判断投票多选类型
             List<string> items = voteUpdate.VoteItemIDs.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
-            DateTime dateTime = DateTime.Now;
-
-            foreach (string item in items)
+            if (items.Count == 0)
             {
-                VoteStatistics voteStatistics = new VoteStatistics();
-                voteStatistics.ID = Guid.NewGuid().ToString("N");
-                voteStatistics.OpenID = voteUpdate.OpenID;
-                voteStatistics.VoteID = voteUpdate.VoteID;
-                voteStatistics.VoteItemID = item;
-                voteStatistics.CreateTime = dateTime;
-                DbContext.VoteStatistics.Add(voteStatistics);
+                return;
             }
 
-            DbContext.SaveChanges();
+            Vote vote= DbContext.Vote.Find(voteUpdate.VoteID);
+            //判断是否存在该投票
+            if (vote != null)
+            {
+                //判断投票单选选类型
+                if (vote.VoteMulti==0)
+                {
+                    if (items.Count>1)
+                    {
+                        return;
+                    }
+                }
+                //判断是否可重复投票
+                if (vote.LimitTimes == 0)
+                {
+                   int Times= DbContext.VoteStatistics.Where(e => e.OpenID == vote.OpenID && e.VoteID == vote.VoteID).ToList().Count;
+                    //没投票过
+                    if (Times >0)
+                    {
+                        return;
+                    }
+                }
 
+                DateTime dateTime = DateTime.Now;
+                foreach (string item in items)
+                {
+                    VoteStatistics voteStatistics = new VoteStatistics();
+                    voteStatistics.ID = Guid.NewGuid().ToString("N");
+                    voteStatistics.OpenID = voteUpdate.OpenID;
+                    voteStatistics.VoteID = voteUpdate.VoteID;
+                    voteStatistics.VoteItemID = item;
+                    voteStatistics.CreateTime = dateTime;
+                    DbContext.VoteStatistics.Add(voteStatistics);
+                }
+
+                DbContext.SaveChanges();
+            }
         }
 
         //// DELETE: api/ApiWithActions/5
