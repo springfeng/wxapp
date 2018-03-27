@@ -80,7 +80,10 @@ namespace wxApi.Controllers
                 
             }
         }
-
+        /// <summary>
+        /// 更新投票
+        /// </summary>
+        /// <param name="voteUpdate"></param>
         // PUT: api/Vote/5
         [HttpPut]
         public void Put(VoteUpdate voteUpdate)
