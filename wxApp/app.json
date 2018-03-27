@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/votelist/votelist",
     "pages/votecreate/votecreate",
-    "pages/vote/vote"
+    "pages/vote/vote",
+    "pages/Statistics/Statistics"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -27,9 +28,15 @@
       },
       {
         "pagePath": "pages/votelist/votelist",
-        "text": "我的",
+        "text": "我的投票",
         "selectedIconPath": "images/my.png",
         "iconPath": "images/my.png"
+      },
+      {
+        "pagePath": "pages/Statistics/Statistics",
+        "text": "我的统计",
+        "selectedIconPath": "images/tj.png",
+        "iconPath": "images/tj.png"
       }
     ]
   },

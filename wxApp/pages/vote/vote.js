@@ -139,7 +139,12 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    var article_title="全民投票小助手-免费、协同、高效、投票";
+      var path = '/pages/vote/vote?VoteID=' + this.data.VoteID + '&OpenID=' + this.data.OpenID;
+    return {
+      title: article_title,
+      path: path
+    }
   }
   ,
   /**
