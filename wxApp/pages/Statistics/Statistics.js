@@ -73,19 +73,19 @@ function initChart(canvas, width, height) {
       radius: [0, '60%'],
       data: [{
         value: 55,
-        name: '北京'
+        name: '北京：55'
       }, {
         value: 20,
-        name: '武汉'
+        name: '武汉：20'
       }, {
         value: 10,
-        name: '杭州'
+        name: '杭州：10'
       }, {
         value: 20,
-        name: '广州'
+        name: '广州：20'
       }, {
         value: 38,
-        name: '上海'
+        name: '上海：38'
       },
       ],
       itemStyle: {

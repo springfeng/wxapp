@@ -23,3 +23,6 @@
         </view>
 </view>
 
+<button class="zan-btn" bindtap="showToast">
+      显示toast
+    </button>
