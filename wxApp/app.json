@@ -9,7 +9,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "投票助手",
+    "navigationBarTitleText": "全民投票助手",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {

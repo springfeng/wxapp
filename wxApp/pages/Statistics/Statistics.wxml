@@ -1,2 +1,22 @@
-<!--pages/Statistics/Statistics.js.wxml-->
-<text>pages/Statistics/Statistics.wxml</text>
+
+<view class="move-container">
+  <ec-canvas id="mychart-dom-move-bar" canvas-id="mychart-move-bar" ec="{{ ecBar }}"></ec-canvas>
+
+  <view class="weui-cells__title">{{Vote.VoteTitle}}</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__hd">
+                    <image src="{{userInfo.avatarUrl}}" style="margin-right: 5px;vertical-align: middle;width:40px; height: 40px;"></image>
+                </view>
+                <view class="weui-cell__bd">{{userInfo.nickName}}</view>
+                <view class="weui-cell__ft">2018-09-10 10:00:00</view>
+            </view>
+            <view class="weui-cell">
+                <view class="weui-cell__hd">
+                    <image src="{{userInfo.avatarUrl}}" style="margin-right: 5px;vertical-align: middle;width:40px; height: 40px;"></image>
+                </view>
+                <view class="weui-cell__bd">{{userInfo.nickName}}</view>
+                <view class="weui-cell__ft">2018-09-10 10:00:00</view>
+            </view>
+        </view>
+</view>
