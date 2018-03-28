@@ -37,6 +37,9 @@ Page({
     this.setData({
       userInfo: app.globalData.userInfo
     })
+  },
+  onLoad: function (opt) {
+
   }
 });
 
@@ -96,5 +99,24 @@ function initChart(canvas, width, height) {
   };
 
   chart.setOption(option);
+  chart.on("click", function (e) {
+    // console.log(e);
+    // // 显示文字、图标，执行回调函数
+    // console.log(wetoast);
+    // wetoast.toast({
+    //   // img: 'https://raw.githubusercontent.com/kiinlam/wetoast/master/images/star.png',
+    //   title: e.name + ':' + e.value +'百分比：'+ e.percent+'%',
+    //   success(data) {
+    //     // console.log(Date.now() + ': success')
+    //   },
+    //   fail(data) {
+    //     // console.log(Date.now() + ': fail')
+    //   },
+    //   complete(data) {
+    //     // console.log(Date.now() + ': complete')
+    //   },
+    //   duration:300
+    // })
+  })
   return chart;
 }
