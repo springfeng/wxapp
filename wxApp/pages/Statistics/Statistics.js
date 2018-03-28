@@ -13,6 +13,27 @@ Page({
    */
   onLoad: function (options) {
     wx.hideShareMenu();
+    // console.log("接收到的参数是str=" + options.VoteID + "-" + options.OpenID); 
+    var self = this;
+
+    //获取投票详情
+    wx.request({
+      url: 'https://www.superiot.vip/api/VoteDetail/?OpenID=' + options.OpenID + '&VoteID=' + options.VoteID + '&rn=' + Math.random(),
+      method: "GET",
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded' //必须修改才能post成功
+      },
+      success: function (res) {
+        console.log(res);
+        self.setData({
+          Vote: res.data,
+          VoteItemsList: res.data.VoteItemsList,
+          ItemSelected: {},
+          OpenID: options.OpenID,
+          VoteID: options.VoteID
+        });
+      }
+    })
   },
 
   /**

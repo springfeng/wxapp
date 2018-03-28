@@ -28,15 +28,9 @@
       },
       {
         "pagePath": "pages/votelist/votelist",
-        "text": "我的投票",
+        "text": "我的",
         "selectedIconPath": "images/my.png",
         "iconPath": "images/my.png"
-      },
-      {
-        "pagePath": "pages/Statistics/Statistics",
-        "text": "我的统计",
-        "selectedIconPath": "images/tj.png",
-        "iconPath": "images/tj.png"
       }
     ]
   },

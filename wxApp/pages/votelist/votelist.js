@@ -94,11 +94,8 @@ Page({
   onShareAppMessage: function () {
 
   },
-  // 点击投票列表
-  itemClick: function (e) {
-    // console.log(e.target.dataset.voteid);
-    // console.log("你点击了");
-    // console.log('/pages/vote/vote?VoteID=' + e.target.dataset.voteid);
+  // 投票详情
+  VoteInfoClick: function (e) {
     //跳转到详情页
     wx.navigateTo({
       url: '/pages/vote/vote?VoteID=' + e.target.dataset.voteid + '&OpenID=' + openID,
@@ -115,6 +112,27 @@ Page({
         // complete
       }
     })
-
+  },
+  // 投票统计
+  VoteStaClick: function (e) {
+    // console.log(e.target.dataset.voteid);
+    // console.log("你点击了");
+    // console.log('/pages/vote/vote?VoteID=' + e.target.dataset.voteid);
+    //跳转到详情页
+    wx.navigateTo({
+      url: '/pages/Statistics/Statistics?VoteID=' + e.target.dataset.voteid + '&OpenID=' + openID,
+      success: function (res) {
+        // success
+        // console.log('onBtnClick success() res:');
+      },
+      fail: function () {
+        // fail
+        // console.log('onBtnClick fail() !!!');
+      },
+      complete: function () {
+        // console.log('onBtnClick complete() !!!');
+        // complete
+      }
+    })
   }
 })
