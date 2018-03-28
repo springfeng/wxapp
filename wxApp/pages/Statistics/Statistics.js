@@ -48,6 +48,15 @@ function initChart(canvas, width, height) {
   canvas.setChart(chart);
 
   var option = {
+    title: {
+      text: '同名数量统计',
+      subtext: '纯属虚构',
+      x: 'center'
+    },
+    tooltip: {
+      trigger: 'item',
+      formatter: "nihao"
+    },
     backgroundColor: "#ffffff",
     color: ["#37A2DA", "#32C5E9", "#67E0E3", "#91F2DE", "#FFDB5C", "#FF9F7F"],
     series: [{
