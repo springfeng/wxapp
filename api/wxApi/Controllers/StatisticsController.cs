@@ -35,7 +35,7 @@ namespace wxApi.Controllers
                 Vote vote = DbContext.Vote.Where(e => e.OpenID == OpenID && e.VoteID == VoteID).FirstOrDefault();
                 view_Stat.VoteTitle = vote.VoteTitle;
 
-                List<VoteItems> items = DbContext.VoteItems.OrderByDescending(e=>e.CreateTime).Where(e => e.VoteID == VoteID).ToList();
+                List<VoteItems> items = DbContext.VoteItems.Where(e => e.VoteID == VoteID).ToList();
                 View_VoteDetail voteDetail = new View_VoteDetail();
                 foreach (VoteItems item in items)
                 {
@@ -43,7 +43,7 @@ namespace wxApi.Controllers
                     view_Stat.VoteItems.Add(new View_VoteItemsStat() { name = item.ItemName+"："+ Value, value = Value });
                 }
 
-               List<VoteStatistics> Users= DbContext.VoteStatistics.Where(e => e.VoteID == vote.VoteID).ToList();
+               List<VoteStatistics> Users= DbContext.VoteStatistics.OrderByDescending(e => e.CreateTime).Where(e => e.VoteID == vote.VoteID).ToList();
                 foreach (VoteStatistics sta in Users)
                 {
                     Users user = DbContext.Users.Find(sta.OpenID);
