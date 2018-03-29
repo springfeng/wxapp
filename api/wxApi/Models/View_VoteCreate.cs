@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace wxApi.Models
 {
-    public class VoteCreate
+    public class View_VoteCreate
     {
         public string VoteTitle { get; set; }
         public System.DateTime BeginTime { get; set; }

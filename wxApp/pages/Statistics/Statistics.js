@@ -12,18 +12,11 @@ Page({
   },
   data: {
     userInfo: {},
-    Vote: {
-      VoteID: '2f43ad5e92234905b1b0b4a65704eea9',
-      VoteTitle: '文字猜谜',
-      OpenID: "oHm4a0ZjlzDfwDP1CFPhge3XdAxM",
-      VoteMulti: 1,
-    },
+    VoteTitle: '文字猜谜',
     VoteItemsList: [
       { VoteItemID: "4176f2743561433abcf74049c7dc4e7c", ItemName: "妇女但反对" },
       { VoteItemID: "4176f2743561433abcf74049c7dc4e7c", ItemName: "543543" }
     ],
-    ItemSelected: {},
-    OpenID: '',
     ecBar: {
       // 如果想要禁止触屏事件，以保证在图表区域内触摸移动仍能滚动页面，
       // 就将 disableTouch 设为 true
@@ -38,8 +31,28 @@ Page({
       userInfo: app.globalData.userInfo
     })
   },
-  onLoad: function (opt) {
+  onLoad: function (options) {
+    // console.log("接收到的参数是str=" + options.VoteID + "-" + options.OpenID); 
+    var self = this;
 
+    //获取投票详情
+    wx.request({
+      url: 'https://www.superiot.vip/api/Statistics/?OpenID=' + options.OpenID + '&VoteID=' + options.VoteID + '&rn=' + Math.random(),
+      method: "GET",
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded' //必须修改才能post成功
+      },
+      success: function (res) {
+        console.log(res);
+        // self.setData({
+        //   Vote: res.data,
+        //   VoteItemsList: res.data.VoteItemsList,
+        //   ItemSelected: {},
+        //   OpenID: options.OpenID,
+        //   VoteID: options.VoteID
+        // });
+      }
+    })
   }
 });
 
@@ -52,8 +65,8 @@ function initChart(canvas, width, height) {
 
   var option = {
     title: {
-      text: '同名数量统计',
-      subtext: '纯属虚构',
+      text: '',
+      subtext: '',
       x: 'center'
     },
     tooltip: {

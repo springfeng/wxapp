@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace wxApi.Models
 {
-    public class VoteUpdate
+    public class View_VoteList
     {
-        public string OpenID { get; set; }
         public string VoteID { get; set; }
-        public string VoteItemIDs { get; set; }
+        public string VoteTitle { get; set; }
+
     }
 }

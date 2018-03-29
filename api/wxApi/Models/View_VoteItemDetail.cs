@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace wxApi.Models
 {
-    public class VoteItemDetail
+    public class View_VoteItemDetail
     {
         public string VoteItemID { get; set; }
         public string ItemName { get; set; }

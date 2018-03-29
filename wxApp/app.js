@@ -19,7 +19,7 @@ App({
             url: 'https://www.superiot.vip/api/wechat/?jsCode='+res.code,
             method: 'GET',
             success:function (json) {
-              console.log('请求openID--' + JSON.stringify(json.data));
+              // console.log('请求openID--' + JSON.stringify(json.data));
               if(json.data.retCode){
                 // wx.showModal({
                 //   content: json.data.retContent,
@@ -35,10 +35,10 @@ App({
                 //将openid存储到本地手机
                 wx.setStorageSync('OpenID', json.data.retContent);
 
-                console.log('获取用户登录态成功！' + json.data.retContent);
+                // console.log('获取用户登录态成功！' + json.data.retContent);
               }else{
                 //失败
-                console.log('获取用户登录态失败！' + res.errMsg);
+                // console.log('获取用户登录态失败！' + res.errMsg);
               }
             }
           })
@@ -107,7 +107,6 @@ App({
                          wx.getUserInfo({
                            success: res => {
                              // 可以将 res 发送给后台解码出 unionId
-
                              this.globalData.userInfo = res.userInfo
 
                              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回

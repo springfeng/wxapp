@@ -15,11 +15,26 @@
 <input type="button" value="获取投票详情" onclick="GetDetail()" />
 <input type="button" value="获取投票列表" onclick="GetList()" />
 <input type="button" value="投票" onclick="VoteUpdate()" />
+<input type="button" value="投票统计" onclick="VoteStat()" />
 
 <div id="div_ShowInfo">555555555555</div>
 
 
 <script type="text/javascript">
+    function VoteStat() {
+        var txt = "";
+        $.ajax({
+            url: '/api/Statistics/?OpenID=oHm4a0ZjlzDfwDP1CFPhge3XdAxM&VoteID=d38d1626cf334b3abd979f6f594d86bb&rn=' + Math.random(),
+            type: 'get',
+            
+            dataType: 'json',
+            success: function (data) {
+                $("#div_ShowInfo").text(JSON.stringify(data));
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+            }
+        });
+    }
     function VoteUpdate() {
         var txt = "";
         $.ajax({

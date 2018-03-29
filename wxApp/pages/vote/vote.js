@@ -59,7 +59,7 @@ Page({
         }
       }
     }
-    console.log(itemsel)
+    // console.log(itemsel)
     this.setData({
       VoteItemsList: Items,
       ItemSelected: itemsel

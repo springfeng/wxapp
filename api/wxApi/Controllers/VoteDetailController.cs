@@ -21,7 +21,7 @@ namespace wxApi.Controllers
         }
 
         [HttpGet]
-        public VoteDetail Get(string OpenID,string VoteID)
+        public View_VoteDetail Get(string OpenID,string VoteID)
         {
             if (OpenID == "" || OpenID == null)
             {
@@ -35,13 +35,13 @@ namespace wxApi.Controllers
             {
                 Vote vote = DbContext.Vote.Where(e => e.OpenID == OpenID && e.VoteID == VoteID).FirstOrDefault();
                 List<VoteItems> items = DbContext.VoteItems.Where(e => e.VoteID == VoteID).ToList();
-                VoteDetail voteDetail = new VoteDetail();
+                View_VoteDetail voteDetail = new View_VoteDetail();
                 voteDetail.VoteID = vote.VoteID;
                 voteDetail.VoteTitle = vote.VoteTitle;
                 voteDetail.OpenID = vote.OpenID;
                 voteDetail.VoteMulti = vote.VoteMulti;
                 foreach (VoteItems item in items) {
-                    voteDetail.VoteItemsList.Add(new VoteItemDetail() { ItemName = item.ItemName, VoteItemID = item.VoteItemID });
+                    voteDetail.VoteItemsList.Add(new View_VoteItemDetail() { ItemName = item.ItemName, VoteItemID = item.VoteItemID });
                 }
                 return voteDetail;
             }

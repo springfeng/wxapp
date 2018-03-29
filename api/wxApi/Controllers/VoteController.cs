@@ -31,7 +31,7 @@ namespace wxApi.Controllers
         /// <returns></returns>
         // GET: api/Vote/5
         [HttpGet]
-        public List<VoteList> Get(string OpenID,string rn)
+        public List<View_VoteList> Get(string OpenID,string rn)
         {
             if (OpenID == "" || OpenID == null)
             {
@@ -41,7 +41,7 @@ namespace wxApi.Controllers
             {
                 return DbContext.Vote.OrderByDescending(p => p.CreateTime)
                     .Where(e => e.OpenID == OpenID)
-                    .Select(o => new VoteList() { VoteID = o.VoteID, VoteTitle = o.VoteTitle })
+                    .Select(o => new View_VoteList() { VoteID = o.VoteID, VoteTitle = o.VoteTitle })
                     .ToList();
             }
         }
@@ -53,7 +53,7 @@ namespace wxApi.Controllers
         /// <param name="voteCreate"></param>
         // POST: api/Vote
         [HttpPost]
-        public void Post(VoteCreate voteCreate)
+        public void Post(View_VoteCreate voteCreate)
         {
             try
             { //创建投票
@@ -86,7 +86,7 @@ namespace wxApi.Controllers
         /// <param name="voteUpdate"></param>
         // PUT: api/Vote/5
         [HttpPut]
-        public void Put(VoteUpdate voteUpdate)
+        public void Put(View_VoteUpdate voteUpdate)
         {
             //更新投票
             List<string> items = voteUpdate.VoteItemIDs.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).ToList();
