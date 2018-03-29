@@ -53,10 +53,13 @@ namespace wxApi.Controllers
         /// <param name="voteCreate"></param>
         // POST: api/Vote
         [HttpPost]
-        public void Post(View_VoteCreate voteCreate)
+        public ReturnJsonResult Post(View_VoteCreate voteCreate)
         {
+            ReturnJsonResult retJson = new ReturnJsonResult();
+
             try
-            { //创建投票
+            { 
+                //创建投票
                 Vote vote = new Vote();
                 vote.OpenID = voteCreate.OpenID;
                 vote.BeginTime = voteCreate.BeginTime;
@@ -74,10 +77,17 @@ namespace wxApi.Controllers
                 DbContext.Vote.Add(vote);
 
                 DbContext.SaveChanges();
+
+                retJson.retCode = true;
+                retJson.retMsg = "";
+                retJson.retContent = "";
+                return retJson;
             }
             catch (Exception e)
             {
-                
+                retJson.retCode = false;
+                retJson.retMsg = "异常";
+                return retJson;
             }
         }
         /// <summary>
@@ -86,36 +96,44 @@ namespace wxApi.Controllers
         /// <param name="voteUpdate"></param>
         // PUT: api/Vote/5
         [HttpPut]
-        public void Put(View_VoteUpdate voteUpdate)
+        public ReturnJsonResult Put(View_VoteUpdate voteUpdate)
         {
+            ReturnJsonResult retJson = new ReturnJsonResult();
+
             //更新投票
             List<string> items = voteUpdate.VoteItemIDs.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
             if (items.Count == 0)
             {
-                return;
+                retJson.retCode = false;
+                retJson.retMsg = "不存在投票";
+                return retJson;
             }
 
-            Vote vote= DbContext.Vote.Find(voteUpdate.VoteID);
+            Vote vote = DbContext.Vote.Find(voteUpdate.VoteID);
             //判断是否存在该投票
             if (vote != null)
             {
                 //判断投票单选选类型
-                if (vote.VoteMulti==0)
+                if (vote.VoteMulti == 0)
                 {
-                    if (items.Count>1)
+                    if (items.Count > 1)
                     {
-                        return;
+                        retJson.retCode = false;
+                        retJson.retMsg = "单选类型";
+                        return retJson;
                     }
                 }
                 //判断是否可重复投票
                 if (vote.LimitTimes == 0)
                 {
-                   int Times= DbContext.VoteStatistics.Where(e => e.OpenID == vote.OpenID && e.VoteID == vote.VoteID).ToList().Count;
+                    int Times = DbContext.VoteStatistics.Where(e => e.OpenID == vote.OpenID && e.VoteID == vote.VoteID).ToList().Count;
                     //没投票过
-                    if (Times >0)
+                    if (Times > 0)
                     {
-                        return;
+                        retJson.retCode = false;
+                        retJson.retMsg = "已经投过票了";
+                        return retJson;
                     }
                 }
 
@@ -132,22 +150,51 @@ namespace wxApi.Controllers
                 }
 
                 DbContext.SaveChanges();
+                retJson.retCode = true;
+                retJson.retMsg = "";
+                return retJson;
+            }
+            else
+            {
+                retJson.retCode = false;
+                retJson.retMsg = "没有该投票";
+                return retJson;
             }
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/Vote/
         [HttpDelete]
-        public void Delete(string VoteID,string OpenID)
+        public ReturnJsonResult Delete(string VoteID, string OpenID)
         {
+            ReturnJsonResult retJson = new ReturnJsonResult();
+
             //删除投票
-            //判断是否是创建人
-            Vote  vote= DbContext.Vote.Where(e=>e.VoteID==VoteID&& e.OpenID==OpenID).FirstOrDefault();
-            if (vote != null)
+            try
             {
-                DbContext.VoteStatistics.RemoveRange(DbContext.VoteStatistics.Where(e => e.VoteID == VoteID));
-                DbContext.VoteItems.RemoveRange(DbContext.VoteItems.Where(e => e.VoteID == VoteID));
-                DbContext.Vote.RemoveRange(DbContext.Vote.Where(e => e.VoteID == VoteID && e.OpenID == OpenID));
-                DbContext.SaveChanges();
+                //判断是否是创建人
+                Vote vote = DbContext.Vote.Where(e => e.VoteID == VoteID && e.OpenID == OpenID).FirstOrDefault();
+                if (vote != null)
+                {
+                    DbContext.VoteStatistics.RemoveRange(DbContext.VoteStatistics.Where(e => e.VoteID == VoteID));
+                    DbContext.VoteItems.RemoveRange(DbContext.VoteItems.Where(e => e.VoteID == VoteID));
+                    DbContext.Vote.RemoveRange(DbContext.Vote.Where(e => e.VoteID == VoteID && e.OpenID == OpenID));
+                    DbContext.SaveChanges();
+                    retJson.retCode = true;
+                    retJson.retMsg = "";
+                    return retJson;
+                }
+                else
+                {
+                    retJson.retCode = false;
+                    retJson.retMsg = "参数不正确";
+                    return retJson;
+                }
+            }
+            catch (Exception ex)
+            {
+                retJson.retCode = false;
+                retJson.retMsg = "异常";
+                return retJson;
             }
         }
     }

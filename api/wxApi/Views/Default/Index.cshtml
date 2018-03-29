@@ -17,11 +17,25 @@
 <input type="button" value="投票" onclick="VoteUpdate()" />
 <input type="button" value="投票统计" onclick="VoteStat()" />
 <input type="button" value="更新用户" onclick="UserUpdate()" />
+<input type="button" value="删除用户" onclick="UserDelete()" />
 
 <div id="div_ShowInfo">555555555555</div>
 
 
 <script type="text/javascript">
+    function UserDelete() {
+        $.ajax({
+            url: '/api/Vote/?VoteID=d38d1626cf334b3abd979f6f594d86bb&OpenID=oHm4a0ZjlzDfwDP1CFPhge3XdAxM&rn=' + Math.random(),
+            type: 'delete',
+           
+            dataType: 'json',
+            success: function (data) {
+                $("#div_ShowInfo").text(JSON.stringify(data));
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+            }
+        });
+    }
     function UserUpdate() {
         var txt = "";
         $.ajax({

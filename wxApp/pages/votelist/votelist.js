@@ -24,15 +24,7 @@ Page({
       openID = app.globalData.openID;
       // console.log("从globalData获取OpenID");
     }
-    // wx.showModal({
-    //   content: openID + "--" + wx.getStorageSync('OpenID') + "--" + app.globalData.openID,
-    //   showCancel: false,
-    //   success: function (res) {
-    //     if (res.confirm) {
-    //       console.log('用户点击确定')
-    //     }
-    //   }
-    // });
+
     //请求个人的投票数据
     wx.request({
       url: 'https://www.superiot.vip/api/Vote/?OpenID=' + openID + '&rn=' + Math.random(),
@@ -94,53 +86,9 @@ Page({
   onShareAppMessage: function () {
 
   },
-  // 投票详情
-  VoteInfoClick: function (e) {
-    //跳转到详情页
-    wx.navigateTo({
-      url: '/pages/vote/vote?VoteID=' + e.target.dataset.voteid + '&OpenID=' + openID,
-      success: function (res) {
-        // success
-        // console.log('onBtnClick success() res:');
-      },
-      fail: function () {
-        // fail
-        // console.log('onBtnClick fail() !!!');
-      },
-      complete: function () {
-        // console.log('onBtnClick complete() !!!');
-        // complete
-      }
-    })
-  },
-  // 投票统计
-  VoteStaClick: function (e) {
-    // console.log(e.target.dataset.voteid);
-    // console.log("你点击了");
-    // console.log('/pages/vote/vote?VoteID=' + e.target.dataset.voteid);
-    //跳转到详情页
-    wx.navigateTo({
-      url: '/pages/Statistics/Statistics?VoteID=' + e.target.dataset.voteid + '&OpenID=' + openID,
-      success: function (res) {
-        // success
-        // console.log('onBtnClick success() res:');
-      },
-      fail: function () {
-        // fail
-        // console.log('onBtnClick fail() !!!');
-      },
-      complete: function () {
-        // console.log('onBtnClick complete() !!!');
-        // complete
-      }
-    })
-  },
-  // 删除投票统计
-  VoteDelClick: function (e) {
-
-  },
   //操作
   VoteClick: function (e) {
+    var self = this;
     wx.showActionSheet({
       itemList: ['详情', '统计', '删除'],
       success: function (res) {
@@ -182,6 +130,17 @@ Page({
             })
           } else if (res.tapIndex == 2) {
             //删除
+            wx.request({
+              url: 'https://www.superiot.vip/api/Vote/?VoteID=' + e.target.dataset.voteid + '&OpenID=' + openID,
+              method: 'delete', 
+              header: {
+                'Content-Type': 'application/x-www-form-urlencoded' //必须修改才能post成功
+              },
+              success: function (json) {
+                console.log(json)
+                self.onLoad();
+              }
+            })
           }
         }
       }

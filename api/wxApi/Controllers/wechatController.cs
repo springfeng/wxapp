@@ -32,6 +32,8 @@ namespace wxApi.Controllers
         [HttpGet]
         public ReturnJsonResult Get(string jsCode)
         {
+            ReturnJsonResult retJson = new ReturnJsonResult();
+
             string appId = "wx238f9629abbb4cc5";
             string secret = "a6f019c01cac981cb71d65b9efd2f549";
 
@@ -50,7 +52,6 @@ namespace wxApi.Controllers
                 }
                 
                 //返回openid
-                ReturnJsonResult retJson = new ReturnJsonResult();
                 retJson.retCode = true;
                 retJson.retMsg = "";
                 retJson.retContent = ret.openid;
@@ -58,10 +59,8 @@ namespace wxApi.Controllers
             }
             else
             {
-                ReturnJsonResult retJson = new ReturnJsonResult();
                 retJson.retCode = false;
                 retJson.retMsg = ret.errcode.ToString();
-                retJson.retContent = "";
                 return retJson;
             }
         }
@@ -72,8 +71,10 @@ namespace wxApi.Controllers
         /// <param name="voteCreate"></param>
         // POST: api/wechat
         [HttpPost]
-        public void Post(View_UserUpdate userUpdate)
+        public ReturnJsonResult Post(View_UserUpdate userUpdate)
         {
+            ReturnJsonResult retJson = new ReturnJsonResult();
+
             try
             {
                 log.Error("111");
@@ -94,10 +95,17 @@ namespace wxApi.Controllers
                 DbContext.Users.Update(searchUser);
 
                 DbContext.SaveChanges();
+                retJson.retCode = true;
+                retJson.retMsg = "";
+                return retJson;
             }
             catch (Exception e)
             {
-                log.Error(e.Message+e.Source+e.StackTrace);
+                log.Error(e.Message + e.Source + e.StackTrace);
+
+                retJson.retCode = false;
+                retJson.retMsg = "异常";
+                return retJson;
             }
         }
     }    
