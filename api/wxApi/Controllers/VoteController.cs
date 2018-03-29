@@ -193,7 +193,7 @@ namespace wxApi.Controllers
             catch (Exception ex)
             {
                 retJson.retCode = false;
-                retJson.retMsg = "异常";
+                retJson.retMsg = "异常"+ ex.Message+ex.Source+ex.StackTrace;
                 return retJson;
             }
         }
