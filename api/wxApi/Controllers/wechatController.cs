@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using log4net;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,12 +17,16 @@ namespace wxApi.Controllers
     [Route("api/wechat")]
     public class wechatController : Controller
     {
+        //log4Net
+        private ILog log;
         private EFDbContext DbContext;
         private readonly IHostingEnvironment _hostingEnvironment;
         public wechatController(EFDbContext context, IHostingEnvironment hostingEnvironment)
         {
             DbContext = context;
             _hostingEnvironment = hostingEnvironment;
+            //log4Net
+            this.log = LogManager.GetLogger(Startup.repository.Name, typeof(wechatController));
         }
         // GET: api/wechat
         [HttpGet]
@@ -71,6 +76,7 @@ namespace wxApi.Controllers
         {
             try
             {
+                log.Error("111");
                 Users searchUser = DbContext.Users.Find(userUpdate.OpenID);
                 //
                 string HeaderName = userUpdate.OpenID + ".jpg";
@@ -91,7 +97,7 @@ namespace wxApi.Controllers
             }
             catch (Exception e)
             {
-
+                log.Error(e.Message+e.Source+e.StackTrace);
             }
         }
     }    
