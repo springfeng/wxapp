@@ -67,6 +67,9 @@ namespace wxApi
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            //设置自定义配置变量
+            MySetting.SetAppSetting(Configuration.GetSection("MySetting"));
         }
     }
 }

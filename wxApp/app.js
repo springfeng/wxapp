@@ -1,5 +1,5 @@
 //app.js
-
+var OpenID;
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -31,6 +31,7 @@ App({
                 //   }
                 // });
                 //成功
+                OpenID = json.data.retContent;
                 getApp().globalData.openID = json.data.retContent;
                 //将openid存储到本地手机
                 wx.setStorageSync('OpenID', json.data.retContent);
@@ -56,7 +57,11 @@ App({
           wx.getUserInfo({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
-              
+              console.log(res)
+
+              // res.rawData.nickName
+              // res.rawData.avatarUrl
+              this.PostUserInfo(res.rawData.nickName, res.rawData.avatarUrl);
               this.globalData.userInfo = res.userInfo
               
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -75,7 +80,7 @@ App({
               wx.getUserInfo({
                 success: res => {
                   // 可以将 res 发送给后台解码出 unionId
-
+                  this.PostUserInfo(res.rawData.nickName, res.rawData.avatarUrl);
                   this.globalData.userInfo = res.userInfo
 
                   // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -106,6 +111,7 @@ App({
                          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
                          wx.getUserInfo({
                            success: res => {
+                             this.PostUserInfo(res.rawData.nickName, res.rawData.avatarUrl);
                              // 可以将 res 发送给后台解码出 unionId
                              this.globalData.userInfo = res.userInfo
 
@@ -132,5 +138,29 @@ App({
   globalData: {
     userInfo: null,
     openID:null
+  },
+  PostUserInfo: function (NickName,Header){
+    if (OpenID!=undefined){
+      var postData={};
+      postData["OpenID"] = OpenID;
+      postData["NickName"] = NickName;
+      postData["Header"] = Header;
+      wx.request({
+        url: 'https://www.superiot.vip/api/wechat',
+        data: postData,
+        method: "POST",
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded' //必须修改才能post成功
+        },
+        success: function (res) {
+          wx.showToast({
+            title: '创建成功',
+            icon: 'success',
+            duration: 3000
+          });
+        }
+      })
+    }
   }
+
 })

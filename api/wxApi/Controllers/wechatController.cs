@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Senparc.Weixin;
@@ -15,9 +17,11 @@ namespace wxApi.Controllers
     public class wechatController : Controller
     {
         private EFDbContext DbContext;
-        public wechatController(EFDbContext context)
+        private readonly IHostingEnvironment _hostingEnvironment;
+        public wechatController(EFDbContext context, IHostingEnvironment hostingEnvironment)
         {
             DbContext = context;
+            _hostingEnvironment = hostingEnvironment;
         }
         // GET: api/wechat
         [HttpGet]
@@ -54,6 +58,40 @@ namespace wxApi.Controllers
                 retJson.retMsg = ret.errcode.ToString();
                 retJson.retContent = "";
                 return retJson;
+            }
+        }
+
+        /// <summary>
+        /// 创建用户投票
+        /// </summary>
+        /// <param name="voteCreate"></param>
+        // POST: api/wechat
+        [HttpPost]
+        public void Post(View_UserUpdate userUpdate)
+        {
+            try
+            {
+                Users searchUser = DbContext.Users.Find(userUpdate.OpenID);
+                //
+                string HeaderName = userUpdate.OpenID + ".jpg";
+                string webRootPath = _hostingEnvironment.WebRootPath+"/headers/";
+                string FilePath = webRootPath + HeaderName;
+                //设置服务器地址
+                string UrlPath = MySetting.AppSetting("FileUrl") + "headers/" + HeaderName;
+
+                WebClient client = new WebClient();
+                client.DownloadFile(userUpdate.Header, FilePath); 
+
+                searchUser.Header = UrlPath;
+                searchUser.NickName = userUpdate.NickName;
+
+                DbContext.Users.Update(searchUser);
+
+                DbContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+
             }
         }
     }    

@@ -17,10 +17,10 @@ namespace wxApi.Models
         [StringLength(50)]
         public string OpenID { get; set; }
 
-        [StringLength(50)]
+
         public string NickName { get; set; }
 
-        [StringLength(50)]
+
         public string Header { get; set; }
 
         public DateTime? CreateTime { get; set; }
