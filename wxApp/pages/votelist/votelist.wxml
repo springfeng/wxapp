@@ -3,10 +3,11 @@
     <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
       <!-- 都加上点击事件为了能传递数据过去 -->
       <view class="weui-cell__bd" >{{item.VoteTitle}}</view>
-      <view class="weui-vcode-btn" bindtap='VoteInfoClick' data-VoteID="{{item.VoteID}}">详情</view>
+      <!-- <view class="weui-vcode-btn" bindtap='VoteInfoClick' data-VoteID="{{item.VoteID}}">详情</view>
       <view class="weui-vcode-btn" bindtap='VoteStaClick' data-VoteID="{{item.VoteID}}">统计</view>
-      <view class="weui-vcode-btn" bindtap='VoteDelClick' data-VoteID="{{item.VoteID}}">删除</view>
-      <!-- <view class="weui-cell__ft weui-cell__ft_in-access" bindtap='itemClick' data-VoteID="{{item.VoteID}}"></view>  -->
+      <view class="weui-vcode-btn" bindtap='VoteDelClick' data-VoteID="{{item.VoteID}}">删除</view> -->
+      <view class="weui-vcode-btn" bindtap='VoteClick' data-VoteID="{{item.VoteID}}">操作</view>
+
     </navigator>
   </block>
 </view>

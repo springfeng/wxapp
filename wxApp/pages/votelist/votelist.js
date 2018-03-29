@@ -18,7 +18,7 @@ Page({
     wx.hideShareMenu();
     var self = this;
     if (app.globalData.openID == undefined || app.globalData.openID == null) {
-      openID = wx.getStorageSync('OpenID') 
+      openID = wx.getStorageSync('OpenID')
       // console.log("从Storage获取OpenID");
     } else {
       openID = app.globalData.openID;
@@ -137,7 +137,54 @@ Page({
   },
   // 删除投票统计
   VoteDelClick: function (e) {
-    
+
+  },
+  //操作
+  VoteClick: function (e) {
+    wx.showActionSheet({
+      itemList: ['详情', '统计', '删除'],
+      success: function (res) {
+        // console.log(res.tapIndex)
+        if (!res.cancel) {
+          if (res.tapIndex == 0) {
+            //跳转到详情页
+            wx.navigateTo({
+              url: '/pages/vote/vote?VoteID=' + e.target.dataset.voteid + '&OpenID=' + openID,
+              success: function (res) {
+                // success
+                // console.log('onBtnClick success() res:');
+              },
+              fail: function () {
+                // fail
+                // console.log('onBtnClick fail() !!!');
+              },
+              complete: function () {
+                // console.log('onBtnClick complete() !!!');
+                // complete
+              }
+            })
+          } else if (res.tapIndex == 1) {
+            //跳转到详情页
+            wx.navigateTo({
+              url: '/pages/Statistics/Statistics?VoteID=' + e.target.dataset.voteid + '&OpenID=' + openID,
+              success: function (res) {
+                // success
+                // console.log('onBtnClick success() res:');
+              },
+              fail: function () {
+                // fail
+                // console.log('onBtnClick fail() !!!');
+              },
+              complete: function () {
+                // console.log('onBtnClick complete() !!!');
+                // complete
+              }
+            })
+          } else if (res.tapIndex == 2) {
+            //删除
+          }
+        }
+      }
+    });
   }
-  
 })
