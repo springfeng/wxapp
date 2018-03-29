@@ -32,11 +32,11 @@ namespace wxApi.Models
         /// <summary>
         /// 选项标题
         /// </summary>
-        public string ItemName { get; set; }
+        public string name { get; set; }
         /// <summary>
         /// 投票个数
         /// </summary>
-        public int Value { get; set; }
+        public int value { get; set; }
     }
 
     /// <summary>
@@ -55,6 +55,6 @@ namespace wxApi.Models
         /// <summary>
         /// 投票时间
         /// </summary>
-        public DateTime CreateTime { get; set; }
+        public string CreateTime { get; set; }
     }
 }

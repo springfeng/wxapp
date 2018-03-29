@@ -12,17 +12,14 @@ Page({
   },
   data: {
     userInfo: {},
-    VoteTitle: '文字猜谜',
-    VoteItemsList: [
-      { VoteItemID: "4176f2743561433abcf74049c7dc4e7c", ItemName: "妇女但反对" },
-      { VoteItemID: "4176f2743561433abcf74049c7dc4e7c", ItemName: "543543" }
+    VoteTitle: '',
+    VoteItems: [
+      { ItemName: "", Value: "" }
     ],
+    VoteUsers: [],
     ecBar: {
-      // 如果想要禁止触屏事件，以保证在图表区域内触摸移动仍能滚动页面，
-      // 就将 disableTouch 设为 true
-      // disableTouch: true,
-
-      onInit: initChart
+      // 将 lazyLoad 设为 true 后，需要手动初始化图表
+      lazyLoad: true
     }
   },
 
@@ -43,93 +40,147 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded' //必须修改才能post成功
       },
       success: function (res) {
-        console.log(res);
-        // self.setData({
-        //   Vote: res.data,
-        //   VoteItemsList: res.data.VoteItemsList,
-        //   ItemSelected: {},
-        //   OpenID: options.OpenID,
-        //   VoteID: options.VoteID
-        // });
+        // console.log(res);
+        self.setData({
+          VoteTitle: res.data.VoteTitle,
+          VoteItems: res.data.VoteItems,
+          VoteUsers: res.data.VoteUsers
+        });
+
+        // 获取组件
+        self.ecComponent = self.selectComponent('#mychart-dom-move-bar');
+        var colors = [];
+        for (var i = 0; i < res.data.VoteItems.length; i++) {
+          var color = getColor();
+          colors.push(color);
+        }
+
+
+        self.ecComponent.init((canvas, width, height) => {
+          const chart = echarts.init(canvas, null, {
+            width: width,
+            height: height
+          });
+          canvas.setChart(chart);
+
+          var option = {
+            title: {
+              text: self.data.VoteTitle,
+              subtext: '',
+              x: 'center'
+            },
+            backgroundColor: "#ffffff",
+            color: colors,
+            series: [{
+              label: {
+                normal: {
+                  fontSize: 14
+                }
+              },
+              type: 'pie',
+              center: ['50%', '50%'],
+              radius: [0, '60%'],
+              data: self.data.VoteItems,
+              // data: [{
+              //   value: 55,
+              //   name: '北京：55'
+              // }, {
+              //   value: 20,
+              //   name: '武汉：20'
+              // }, {
+              //   value: 10,
+              //   name: '杭州：10'
+              // }, {
+              //   value: 20,
+              //   name: '广州：20'
+              // }, {
+              //   value: 38,
+              //   name: '上海：38'
+              // },
+              // ],
+              itemStyle: {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 2, 2, 0.3)'
+                }
+              }
+            }]
+          };
+
+          chart.setOption(option);
+          // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+          return chart;
+        });
       }
     })
   }
 });
 
-function initChart(canvas, width, height) {
-  const chart = echarts.init(canvas, null, {
-    width: width,
-    height: height
-  });
-  canvas.setChart(chart);
+function getColor() {
 
-  var option = {
-    title: {
-      text: '',
-      subtext: '',
-      x: 'center'
-    },
-    tooltip: {
-      trigger: 'item',
-      formatter: "nihao"
-    },
-    backgroundColor: "#ffffff",
-    color: ["#37A2DA", "#32C5E9", "#67E0E3", "#91F2DE", "#FFDB5C", "#FF9F7F"],
-    series: [{
-      label: {
-        normal: {
-          fontSize: 14
-        }
-      },
-      type: 'pie',
-      center: ['50%', '50%'],
-      radius: [0, '60%'],
-      data: [{
-        value: 55,
-        name: '北京：55'
-      }, {
-        value: 20,
-        name: '武汉：20'
-      }, {
-        value: 10,
-        name: '杭州：10'
-      }, {
-        value: 20,
-        name: '广州：20'
-      }, {
-        value: 38,
-        name: '上海：38'
-      },
-      ],
-      itemStyle: {
-        emphasis: {
-          shadowBlur: 10,
-          shadowOffsetX: 0,
-          shadowColor: 'rgba(0, 2, 2, 0.3)'
-        }
-      }
-    }]
-  };
-
-  chart.setOption(option);
-  chart.on("click", function (e) {
-    // console.log(e);
-    // // 显示文字、图标，执行回调函数
-    // console.log(wetoast);
-    // wetoast.toast({
-    //   // img: 'https://raw.githubusercontent.com/kiinlam/wetoast/master/images/star.png',
-    //   title: e.name + ':' + e.value +'百分比：'+ e.percent+'%',
-    //   success(data) {
-    //     // console.log(Date.now() + ': success')
-    //   },
-    //   fail(data) {
-    //     // console.log(Date.now() + ': fail')
-    //   },
-    //   complete(data) {
-    //     // console.log(Date.now() + ': complete')
-    //   },
-    //   duration:300
-    // })
-  })
-  return chart;
+  return '#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).substr(-6);
 }
+
+
+// function initChart(canvas, width, height) {
+//   const chart = echarts.init(canvas, null, {
+//     width: width,
+//     height: height
+//   });
+//   canvas.setChart(chart);
+
+//   console.log(1)
+
+//   var option = {
+//     title: {
+//       text: '',
+//       subtext: '',
+//       x: 'center'
+//     },
+//     tooltip: {
+//       trigger: 'item',
+//       formatter: "nihao"
+//     },
+//     backgroundColor: "#ffffff",
+//     color: ["#37A2DA", "#32C5E9", "#67E0E3", "#91F2DE", "#FFDB5C", "#FF9F7F"],
+//     series: [{
+//       label: {
+//         normal: {
+//           fontSize: 14
+//         }
+//       },
+//       type: 'pie',
+//       center: ['50%', '50%'],
+//       radius: [0, '60%'],
+//       data: [{
+//         value: 55,
+//         name: '北京：55'
+//       }, {
+//         value: 20,
+//         name: '武汉：20'
+//       }, {
+//         value: 10,
+//         name: '杭州：10'
+//       }, {
+//         value: 20,
+//         name: '广州：20'
+//       }, {
+//         value: 38,
+//         name: '上海：38'
+//       },
+//       ],
+//       itemStyle: {
+//         emphasis: {
+//           shadowBlur: 10,
+//           shadowOffsetX: 0,
+//           shadowColor: 'rgba(0, 2, 2, 0.3)'
+//         }
+//       }
+//     }]
+//   };
+
+//   chart.setOption(option);
+
+//   return chart;
+// }

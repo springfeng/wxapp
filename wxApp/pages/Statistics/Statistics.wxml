@@ -1,24 +1,14 @@
-
-
-
 <view class="move-container">
   <ec-canvas id="mychart-dom-move-bar" canvas-id="mychart-move-bar" ec="{{ ecBar }}"></ec-canvas>
 
-  <view class="weui-cells__title">{{VoteTitle}}</view>
-        <view class="weui-cells weui-cells_after-title">
-            <view class="weui-cell">
-                <view class="weui-cell__hd">
-                    <image src="{{userInfo.avatarUrl}}" style="margin-right: 5px;vertical-align: middle;width:40px; height: 40px;"></image>
-                </view>
-                <view class="weui-cell__bd">{{userInfo.nickName}}</view>
-                <view class="weui-cell__ft">2018-09-10 10:00:00</view>
-            </view>
-            <view class="weui-cell">
-                <view class="weui-cell__hd">
-                    <image src="{{userInfo.avatarUrl}}" style="margin-right: 5px;vertical-align: middle;width:40px; height: 40px;"></image>
-                </view>
-                <view class="weui-cell__bd">{{userInfo.nickName}}</view>
-                <view class="weui-cell__ft">2018-09-10 10:00:00</view>
-            </view>
-        </view>
+
+  <view class="weui-cells weui-cells_after-title" wx:for="{{VoteUsers}}" wx:key="value">
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <image src="{{item.Header}}" style="margin-right: 5px;vertical-align: middle;width:40px; height: 40px;"></image>
+      </view>
+      <view class="weui-cell__bd">{{item.NickName}}</view>
+      <view class="weui-cell__ft">{{item.CreateTime}}</view>
+    </view>
+  </view>
 </view>

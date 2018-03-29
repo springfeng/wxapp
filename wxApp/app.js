@@ -57,10 +57,6 @@ App({
           wx.getUserInfo({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
-              console.log(res)
-
-              // res.rawData.nickName
-              // res.rawData.avatarUrl
               this.PostUserInfo(res.rawData.nickName, res.rawData.avatarUrl);
               this.globalData.userInfo = res.userInfo
               
@@ -153,11 +149,7 @@ App({
           'Content-Type': 'application/x-www-form-urlencoded' //必须修改才能post成功
         },
         success: function (res) {
-          wx.showToast({
-            title: '创建成功',
-            icon: 'success',
-            duration: 3000
-          });
+          console.log("用户更新完成")
         }
       })
     }
