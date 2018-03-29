@@ -134,5 +134,10 @@ Page({
         // complete
       }
     })
+  },
+  // 删除投票统计
+  VoteDelClick: function (e) {
+    
   }
+  
 })

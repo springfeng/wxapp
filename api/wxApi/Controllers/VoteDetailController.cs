@@ -34,16 +34,24 @@ namespace wxApi.Controllers
             else
             {
                 Vote vote = DbContext.Vote.Where(e => e.OpenID == OpenID && e.VoteID == VoteID).FirstOrDefault();
-                List<VoteItems> items = DbContext.VoteItems.Where(e => e.VoteID == VoteID).ToList();
-                View_VoteDetail voteDetail = new View_VoteDetail();
-                voteDetail.VoteID = vote.VoteID;
-                voteDetail.VoteTitle = vote.VoteTitle;
-                voteDetail.OpenID = vote.OpenID;
-                voteDetail.VoteMulti = vote.VoteMulti;
-                foreach (VoteItems item in items) {
-                    voteDetail.VoteItemsList.Add(new View_VoteItemDetail() { ItemName = item.ItemName, VoteItemID = item.VoteItemID });
+                if (vote != null)
+                {
+                    List<VoteItems> items = DbContext.VoteItems.Where(e => e.VoteID == VoteID).ToList();
+                    View_VoteDetail voteDetail = new View_VoteDetail();
+                    voteDetail.VoteID = vote.VoteID;
+                    voteDetail.VoteTitle = vote.VoteTitle;
+                    voteDetail.OpenID = vote.OpenID;
+                    voteDetail.VoteMulti = vote.VoteMulti;
+                    foreach (VoteItems item in items)
+                    {
+                        voteDetail.VoteItemsList.Add(new View_VoteItemDetail() { ItemName = item.ItemName, VoteItemID = item.VoteItemID });
+                    }
+                    return voteDetail;
                 }
-                return voteDetail;
+                else
+                {
+                    return null;
+                }
             }
         }
 

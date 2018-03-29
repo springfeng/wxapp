@@ -5,6 +5,7 @@
       <view class="weui-cell__bd" >{{item.VoteTitle}}</view>
       <view class="weui-vcode-btn" bindtap='VoteInfoClick' data-VoteID="{{item.VoteID}}">详情</view>
       <view class="weui-vcode-btn" bindtap='VoteStaClick' data-VoteID="{{item.VoteID}}">统计</view>
+      <view class="weui-vcode-btn" bindtap='VoteDelClick' data-VoteID="{{item.VoteID}}">删除</view>
       <!-- <view class="weui-cell__ft weui-cell__ft_in-access" bindtap='itemClick' data-VoteID="{{item.VoteID}}"></view>  -->
     </navigator>
   </block>

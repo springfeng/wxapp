@@ -135,11 +135,20 @@ namespace wxApi.Controllers
             }
         }
 
-        //// DELETE: api/ApiWithActions/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //    //删除投票
-        //}
+        // DELETE: api/ApiWithActions/5
+        [HttpDelete]
+        public void Delete(string VoteID,string OpenID)
+        {
+            //删除投票
+            //判断是否是创建人
+            Vote  vote= DbContext.Vote.Where(e=>e.VoteID==VoteID&& e.OpenID==OpenID).FirstOrDefault();
+            if (vote != null)
+            {
+                DbContext.VoteStatistics.RemoveRange(DbContext.VoteStatistics.Where(e => e.VoteID == VoteID));
+                DbContext.VoteItems.RemoveRange(DbContext.VoteItems.Where(e => e.VoteID == VoteID));
+                DbContext.Vote.RemoveRange(DbContext.Vote.Where(e => e.VoteID == VoteID && e.OpenID == OpenID));
+                DbContext.SaveChanges();
+            }
+        }
     }
 }
