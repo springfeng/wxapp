@@ -72,6 +72,6 @@
   
 
 <button type="primary" formType="submit" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" 
-disabled="{{disabled}}" bindtap="createVote" class='btnitem'> 创建投票 </button>
+disabled="{{disabled}}" bindtap="createVote" class='btnitem'> 创建 </button>
 
 </form>
