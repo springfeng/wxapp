@@ -1,6 +1,6 @@
 <form class="formstyle" bindsubmit="formSubmit">
 <view class="page__hd">
-  <view class="weui-cell page__title">{{Vote.VoteTitle}}</view>
+  <view class="weui-cell page__title" style="font-size: 30px;font-weight: 400;">{{Vote.VoteTitle}}</view>
 </view>
 
 <view class="weui-cells weui-cells_after-title">
